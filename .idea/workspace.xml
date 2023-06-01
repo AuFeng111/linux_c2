@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="524cc8db-4375-4029-a652-defc7cf3e02e" name="Default Changelist" comment="" />
+    <list default="true" id="524cc8db-4375-4029-a652-defc7cf3e02e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/foo.db" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +17,9 @@
     </option>
   </component>
   <component name="GOROOT" path="D:\go1.20.2.windows-amd64\go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="2QQbGt2nYBFZ31J5CdJDgeDpkms" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -25,6 +30,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="go.import.settings.migrated" value="true" />
@@ -65,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1685288659880</updated>
       <workItem from="1685288661384" duration="1932000" />
-      <workItem from="1685373509881" duration="12275000" />
+      <workItem from="1685373509881" duration="12964000" />
     </task>
     <servers />
   </component>
