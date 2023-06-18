@@ -25,4 +25,12 @@ func main()  {
 	currentTimeString := currentTime.Format("2023-01-02 15:04:05")
 	fmt.Println(currentTimeString)
 	fmt.Println(reflect.TypeOf(currentTimeString))
+
+	b :=db.Query2()
+	fmt.Println(len(b))
+	var name1 string = ""
+	for i:=0;i<len(b);i++{
+		name1 ="|" +b[i].Hostname+"  " + b[i].ConnIP+"  " +b[i].Time+"|"+"\n"+name1
+	}
+	fmt.Println(name1)
 }

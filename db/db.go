@@ -7,7 +7,9 @@ import (
 )
 
 func Main() {
+	//db, err := sql.Open("sqlite3", "D:\\go1.20.2.windows-amd64\\go\\src\\C2_Linx\\db\\userDB.db")
 	db, err := sql.Open("sqlite3", "D:\\go1.20.2.windows-amd64\\go\\src\\C2_Linx\\db\\userDB.db")
+
 	checkErr(err)
 
 	//插入数据
@@ -68,6 +70,7 @@ func Main() {
 }
 
 func To_Insert(hostname string, connip string, time string)  {
+	//db, err := sql.Open("sqlite3", "/root/桌面/test/db/userDB.db")
 	db, err := sql.Open("sqlite3", "D:\\go1.20.2.windows-amd64\\go\\src\\C2_Linx\\db\\userDB.db")
 	checkErr(err)
 	Insert(db,hostname, connip, time)
@@ -97,8 +100,40 @@ func Query(db *sql.DB)  {
 		fmt.Println("connip:   ",connip)
 		fmt.Println("time:    ",time)
 	}
-
 }
+type C2Info struct {
+	UID      int
+	Hostname string
+	ConnIP   string
+	Time     string
+}
+
+func Query2(db *sql.DB) []C2Info {
+	//db, err := sql.Open("sqlite3", "/root/桌面/test/db/userDB.db")
+	//db, err := sql.Open("sqlite3", "D:\\go1.20.2.windows-amd64\\go\\src\\C2_Linx\\db\\userDB.db")
+	rows, err := db.Query("SELECT * FROM C2_INFO")
+	checkErr(err)
+
+	var c2InfoArr []C2Info
+	for rows.Next() {
+		var uid int
+		var hostname string
+		var connip string
+		var time string
+		err = rows.Scan(&uid, &hostname, &connip, &time)
+		checkErr(err)
+		fmt.Println("uid的值:  ", uid)
+		fmt.Println("hostname:   ", hostname)
+		fmt.Println("connip:   ", connip)
+		fmt.Println("time:    ", time)
+
+		c2Info := C2Info{UID: uid, Hostname: hostname, ConnIP: connip, Time: time}
+		c2InfoArr = append(c2InfoArr, c2Info)
+	}
+
+	return c2InfoArr
+}
+
 func checkErr(err error) {
 	if err != nil {
 		panic(err)
