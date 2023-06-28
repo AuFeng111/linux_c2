@@ -5,7 +5,7 @@
 4、log日志x
 
 运行的时候可能服务器有依赖问题报错： "/lib64/libc.so.6: version GLIBC_2.28' not found"
- 需要更新依赖就好了参考下述文章：   https://mrlin.net/1435.html
+需要更新依赖就好了参考下述文章：   https://mrlin.net/1435.html
 
 ----------------
 
