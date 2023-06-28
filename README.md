@@ -4,10 +4,8 @@
 3、数据库接入存储 记录c2上线的日志、主机信息等等√<br>
 4、log日志x
 
-运行的时候可能服务器有依赖问题报错
- /lib64/libc.so.6: version GLIBC_2.28' not found
-
- 需要更新依赖就好了参考下述文章：https://mrlin.net/1435.html
+运行的时候可能服务器有依赖问题报错： "/lib64/libc.so.6: version GLIBC_2.28' not found"
+ 需要更新依赖就好了参考下述文章：   https://mrlin.net/1435.html
 
 ----------------
 
